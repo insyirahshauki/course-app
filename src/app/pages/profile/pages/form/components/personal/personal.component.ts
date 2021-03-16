@@ -87,7 +87,7 @@ export class PersonalComponent implements OnInit, OnDestroy {
         this.destroy.complete();
     }
 
-    onPhotoChanged(url: string): void {
+    onPhotoChanged(url: string|string[]): void {
         if (url) {
             this.form.controls.photoURL.setValue(url);
         }
