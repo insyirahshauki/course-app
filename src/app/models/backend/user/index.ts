@@ -4,7 +4,9 @@ import { Employee, Recruiter } from './roles';
 export * from './roles';
 export interface User {
     uid: string;
-    name: string;
+    firstname: string;
+    lastname: string;
+    birthdate: number;
     photoURL: string;
     email: string;
     country: string;

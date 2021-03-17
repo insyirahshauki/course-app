@@ -11,11 +11,13 @@ import { User } from '../../store/list/list.models';
 })
 export class EmployeeComponent implements OnInit {
 
+    //ng-model dia employee that take from User models
     @Input() employee: User;
 
     constructor() { }
 
     ngOnInit(): void {
+        console.log("employee",this.employee);
     }
 
 }

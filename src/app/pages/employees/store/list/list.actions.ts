@@ -8,17 +8,17 @@ export enum Types {
 }
 
 // Read
-
+//read data
 export class Read implements Action {
     readonly type = Types.READ;
     constructor() { }
 }
-
+//read data and display data
 export class ReadSuccess implements Action {
     readonly type = Types.READ_SUCCESS;
     constructor(public items: User[]) { }
 }
-
+//if get error
 export class ReadError implements Action {
     readonly type = Types.READ_ERROR;
     constructor(public error: string) { }

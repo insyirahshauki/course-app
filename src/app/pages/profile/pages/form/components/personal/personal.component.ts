@@ -16,7 +16,9 @@ import { StepperService } from '../stepper/services';
 
 
 export interface PersonalForm {
-    name: string;
+    firstname: string;
+    lastname: string;
+    birthdate: number;
     photoURL: string;
     country: string;
 }
@@ -49,11 +51,23 @@ export class PersonalComponent implements OnInit, OnDestroy {
 
         this.form = this.fb.group({
             photoURL: [null],
-            name: [null, {
+            firstname: [null, {
                 updateOn: 'blur', validators: [
                     Validators.required,
                     Validators.maxLength(128),
                     Validators.pattern(regex.latinAndSpaces)
+                ]
+            }],
+            lastname: [null, {
+                updateOn: 'change', validators: [
+                    Validators.required,
+                    Validators.maxLength(128),
+                    Validators.pattern(regex.latinAndSpaces)
+                ]
+            }],
+            birthdate: [null, {
+                updateOn: 'change', validators: [
+                    Validators.required
                 ]
             }],
             country: [null, {

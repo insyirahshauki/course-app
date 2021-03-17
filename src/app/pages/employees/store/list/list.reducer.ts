@@ -2,6 +2,7 @@ import { User } from './list.models';
 import * as fromActions from './list.actions';
 
 export interface ListState {
+    //items for display data
     items: User[];
     loading: boolean;
     error: string;

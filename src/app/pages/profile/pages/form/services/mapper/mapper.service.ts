@@ -17,7 +17,9 @@ export class MapperService {
 
         return {
             personal: {
-                name: user ? user.name : null,
+                firstname: user ? user.firstname : null,
+                lastname: user ? user.lastname : null,
+                birthdate: user ? user.birthdate : null,
                 photoURL: user ? user.photoURL : null,
                 country: user ? user.country : null
             },
@@ -64,7 +66,9 @@ export class MapperService {
     formToUserCreate(form: ProfileForm, dictionaries: Dictionaries): UserCreateRequest {
 
         return {
-            name: form.personal.name,
+            firstname: form.personal.firstname,
+            lastname: form.personal.lastname,
+            birthdate: form.personal.birthdate,
             photoURL: form.personal.photoURL,
             roleId: form.professional.roleId,
             country: form.personal.country,
@@ -80,7 +84,9 @@ export class MapperService {
             uid: user.uid,
             email: user.email,
             created: user.created,
-            name: form.personal.name,
+            firstname: form.personal.firstname,
+            lastname: form.personal.lastname,
+            birthdate: form.personal.birthdate,
             photoURL: form.personal.photoURL,
             roleId: form.professional.roleId,
             country: form.personal.country,

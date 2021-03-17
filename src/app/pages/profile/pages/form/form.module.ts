@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
-
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import {
     FormFieldModule, InputModule, AutocompleteModule,
-    SelectModule, CheckboxesModule, RadiosModule, DateRangeModule,
+    SelectModule, CheckboxesModule, RadiosModule, DateRangeModule, DateModule
 } from '@app/shared/controls';
 import { FilesUploadModule } from '@app/shared/popups';
 import { SpinnerModule } from '@app/shared/indicators';
@@ -40,7 +40,9 @@ import { MapperService } from './services/mapper/mapper.service';
         SpinnerModule,
         UserPhotoModule,
         ButtonModule,
-        StepperModule
+        StepperModule,
+        DateModule,
+        MatDatepickerModule
     ],
     providers: [
         MapperService

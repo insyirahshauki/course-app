@@ -97,6 +97,12 @@ export class UserEffects {
         ofType(fromActions.Types.SIGN_OUT),
         switchMap(() =>
             from(this.afAuth.signOut()).pipe(
+                tap(async () => {
+                    // (await this.afAuth.currentUser).sendEmailVerification(
+                    //     environment.firebase.actionCodeSettings
+                    // );
+                    this.router.navigate(['/']);
+                }),
                 map(() => new fromActions.SignOutSuccess()),
                 catchError(err => of(new fromActions.SignOutError(err.message)))
             )

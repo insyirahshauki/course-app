@@ -72,6 +72,7 @@ export class FormComponent implements OnInit, OnDestroy {
         this.stepper.init([
             { key: 'personal', label: 'Personal' },
             { key: 'professional', label: 'Professional' },
+            // { key: 'upload', label: 'Upload'},
         ]);
 
         this.stepper.complete$.pipe(
