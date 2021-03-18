@@ -66,4 +66,8 @@ export class LoginComponent implements OnInit {
 
     }
 
+    onGoogleLogin(): void {
+        this.store.dispatch(new fromUser.SignInWithGoogle());
+      }
+
 }

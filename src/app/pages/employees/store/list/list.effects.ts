@@ -27,7 +27,7 @@ export class ListEffects {
         ofType(fromActions.Types.READ),
         switchMap(() =>
         //will take employee role bcoz want to display employees detail
-            this.afs.collection<User>('users', ref => ref.where('roleId', 'in', ['employee', 'recruiter'])).snapshotChanges().pipe(
+            this.afs.collection<User>('users', ref => ref.where('roleId', '==', ['employee'])).snapshotChanges().pipe(
                 take(1),
                 map(changes => changes.map(x => extractDocumentChangeActionData(x, false))),
                 map((items: User[]) => new fromActions.ReadSuccess(items)),

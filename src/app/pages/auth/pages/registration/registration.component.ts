@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 
@@ -19,6 +19,7 @@ export class RegistrationComponent implements OnInit {
     form: FormGroup;
     regexErrors = regexErrors;
     loading$: Observable<boolean>;
+    // @Output() googleLogin = new EventEmitter();
 
     constructor(
         private fb: FormBuilder,
@@ -82,5 +83,9 @@ export class RegistrationComponent implements OnInit {
             markFormGroupTouched(this.form);
         }
     }
+
+    onGoogleSignUp(): void {
+        this.store.dispatch(new fromUser.SignUpWithGoogle());
+      }
 
 }

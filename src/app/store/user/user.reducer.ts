@@ -51,6 +51,34 @@ export function reducer(state = initialState, action: fromActions.All): UserStat
             return { ...state, error: action.error, loading: false };
         }
 
+        // Sign In With Google
+
+        case fromActions.Types.SIGN_IN_GOOGLE: {
+            return { ...state, loading: true };
+        }
+
+        case fromActions.Types.SIGN_IN_GOOGLE_SUCCESS: {
+            return { ...state, entity: action.user, uid: action.uid, loading: false, error: null };
+        }
+
+        case fromActions.Types.SIGN_IN_GOOGLE_ERROR: {
+            return { ...state, error: action.error, loading: false };
+        }
+
+        // Sign Up with Google
+
+        case fromActions.Types.SIGN_UP_GOOGLE: {
+            return { ...state, loading: true };
+        }
+
+        case fromActions.Types.SIGN_UP_GOOGLE_SUCCESS: {
+            return { ...state, uid: action.uid, loading: false };
+        }
+
+        case fromActions.Types.SIGN_UP_GOOGLE_ERROR: {
+            return { ...state, error: action.error, loading: false };
+        }
+
         // Sign Up
 
         case fromActions.Types.SIGN_UP_EMAIL: {

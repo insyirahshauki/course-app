@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { firestore } from 'firebase/app';
+import { firestore, auth } from 'firebase/app';
 
 import { Observable, from, of } from 'rxjs';
 import { map, switchMap, catchError, take, tap, withLatestFrom } from 'rxjs/operators';
@@ -16,6 +16,7 @@ import { User } from './user.models';
 import * as fromActions from './user.actions';
 
 import { NotificationService } from '@app/services';
+import UserCredential = auth.UserCredential;
 
 type Action = fromActions.All;
 
@@ -71,6 +72,39 @@ export class UserEffects {
         )
     );
 
+    //login with google
+    @Effect()
+    googleLogin: Observable<Action> = this.actions.pipe(
+        ofType(fromActions.Types.SIGN_IN_GOOGLE),
+        map((action: fromActions.SignInWithGoogle) => action.credentials),
+        switchMap(credentials => 
+            from(this.doGoogleLogin()).pipe(
+                switchMap(signInState =>
+                    this.afs.doc<User>(`users/${signInState.user.uid}`).valueChanges().pipe(
+                        take(1),
+                        tap(() => {
+                            this.router.navigate(['/']);
+                        }),
+                        map(user => new fromActions.SignInWithGoogleSuccess(signInState.user.uid, user || null))
+                    )
+                ),
+                catchError(err => {
+                    this.notification.error(err.message);
+                    return of(new fromActions.SignInWithGoogleError(err.message));
+                })
+            )
+        )
+    );
+          
+  
+    private doGoogleLogin(): Promise<UserCredential> {
+      const provider = new auth.GoogleAuthProvider();
+      provider.setCustomParameters({
+        prompt: 'select_account'
+      });
+      return this.afAuth.signInWithPopup(provider);
+    }
+
     @Effect()
     signUpEmail: Observable<Action> = this.actions.pipe(
         ofType(fromActions.Types.SIGN_UP_EMAIL),
@@ -91,6 +125,33 @@ export class UserEffects {
             )
         )
     );
+
+    //singup with google
+    // @Effect()
+    // googleSingUp: Observable<Action> = this.actions.pipe(
+    //     ofType(fromActions.Types.SIGN_UP_GOOGLE),
+    //     map((action: fromActions.SignUpWithGoogle) => action.credentials),
+    //     switchMap(credentials => 
+    //         from(this.doGoogleLogin()).pipe(
+    //             // map((signUpState) => new fromActions.SignUpWithGoogleSuccess(signUpState.user.uid)),
+    //             // map(() => new fromActions.SignOut()),  
+    //             tap(async () => {
+    //                 (await this.afAuth.currentUser).sendEmailVerification(
+    //                     environment.firebase.actionCodeSettings
+    //                 );
+    //                 this.router.navigate(['/auth/email-confirm']);
+    //             }),
+    //             map((signUpState) => new fromActions.SignUpWithGoogleSuccess(signUpState.user.uid)),
+    //             // map(() => new fromActions.SignOut()),  
+    //             catchError(err => {
+    //                 this.notification.error(err.message);
+    //                 return of(new fromActions.SignUpWithGoogleError(err.message));
+    //             })
+    //         )
+    //     )
+    // );
+
+  
 
     @Effect()
     signOut: Observable<Action> = this.actions.pipe(

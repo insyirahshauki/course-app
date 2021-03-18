@@ -17,6 +17,7 @@ export class HeaderComponent implements OnInit {
     constructor(private router: Router) { }
 
     ngOnInit(): void {
+        console.log("test", this.user);
     }
 
     onSignOut(): void {
@@ -26,6 +27,7 @@ export class HeaderComponent implements OnInit {
     onProfileNavigate(): void {
         const path = this.user ? this.user.uid : 'new';
         this.router.navigate(['/profile', path]);
+        console.log("insyiaa",this.user);
     }
 
 }

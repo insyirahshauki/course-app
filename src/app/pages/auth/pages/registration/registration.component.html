@@ -5,7 +5,7 @@
     </div>
 
     <form [formGroup]="form" (submit)="onSubmit()" (keyup.enter)="onSubmit()" novalidate autocomplete="off">
-
+        
         <div class="app-page__content">
             <app-form-field label="Email" [required]="true" [control]="form.controls.email" [isInline]="false"
                 [patternError]="regexErrors.email">
@@ -26,12 +26,24 @@
                 Entered passwords don't match
             </div>
         </div>
-
+      
         <div class="app-page__footer">
             <app-button type="submit">Complete</app-button>
         </div>
 
+        <!-- <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />
+
+        <div class="google-btn">
+          <div class="google-icon-wrapper">
+            <img class="google-icon" src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"/>
+          </div>
+          <p class="btn-text" (click)="onGoogleSignUp()"><b>Sign up with google</b></p>
+        </div> -->
+
+
     </form>
+
+    
 
     <app-spinner *ngIf="loading$ | async"></app-spinner>
 </div>

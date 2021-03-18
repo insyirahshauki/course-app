@@ -11,6 +11,14 @@ export enum Types {
     SIGN_IN_EMAIL_SUCCESS = '[User] Sign In with email: Success',
     SIGN_IN_EMAIL_ERROR = '[User] Sign In with email: Error',
 
+    //GOOGLE
+    SIGN_IN_GOOGLE = '[User] Sign In with Google: Start',
+    SIGN_IN_GOOGLE_SUCCESS = '[User] Sign In with Google: Success',
+    SIGN_IN_GOOGLE_ERROR = '[User] Sign In with Google: Error',
+    SIGN_UP_GOOGLE = '[User] Sing Up with Google: Start',
+    SIGN_UP_GOOGLE_SUCCESS = '[User] Sign Up with Google: Success',
+    SIGN_UP_GOOGLE_ERROR = '[User] Sign Up with Google: Error',
+
     SIGN_UP_EMAIL = '[User] Sign Up with email: Start',
     SIGN_UP_EMAIL_SUCCESS = '[User] Sign Up with email: Success',
     SIGN_UP_EMAIL_ERROR = '[User] Sign Up with email: Error',
@@ -67,6 +75,38 @@ export class SignInEmailError implements Action {
     readonly type = Types.SIGN_IN_EMAIL_ERROR;
     constructor(public error: string) { }
 }
+
+// Sign In with Google
+export class SignInWithGoogle implements Action {
+    readonly type = Types.SIGN_IN_GOOGLE;
+    constructor(public credentials?: any) { }
+}
+
+export class SignInWithGoogleSuccess implements Action {
+    readonly type = Types.SIGN_IN_GOOGLE_SUCCESS;
+    constructor(public uid: string, public user: User) { }
+}
+
+export class SignInWithGoogleError implements Action {
+    readonly type = Types.SIGN_IN_GOOGLE_ERROR;
+    constructor(public error: string) { }
+}
+
+export class SignUpWithGoogle implements Action {
+    readonly type = Types.SIGN_UP_GOOGLE;
+    constructor(public credentials?: any) { }
+}
+
+export class SignUpWithGoogleSuccess implements Action {
+    readonly type = Types.SIGN_UP_GOOGLE_SUCCESS;
+    constructor(public uid: string) { }
+}
+
+export class SignUpWithGoogleError implements Action {
+    readonly type = Types.SIGN_UP_GOOGLE_ERROR;
+    constructor(public error: string) { }
+}
+
 
 // Sign Up
 
@@ -156,4 +196,10 @@ export type All
     | CreateError
     | Update
     | UpdateSuccess
-    | UpdateError;
+    | UpdateError
+    | SignInWithGoogle
+    | SignInWithGoogleSuccess
+    | SignInWithGoogleError
+    | SignUpWithGoogle
+    | SignUpWithGoogleSuccess
+    | SignUpWithGoogleError;
